@@ -29,7 +29,8 @@ export default {
   data () {
     return {
       form: {
-        email: 'diego.lamarao@gmail.com',
+        email: 'diego.lamarao92@gmail.com',
+        name: 'Diego Lamarão',
         password: '123456',
         remember: false
       }
@@ -42,14 +43,30 @@ export default {
     ...mapActions(['loginUser']),
     login () {
       firebase.app.auth().signInWithEmailAndPassword(this.form.email, this.form.password)
-        .then((response) => {
-          console.log(response.user)
-          this.loginUser(response.user)
+        .then(response => {
+          this.updateUser(response)
+          const user = {
+            uid: response.user.uid,
+            email: response.user.email,
+            displayName: response.user.displayName ? response.user.displayName : this.form.name,
+            photo: response.user.photoURL ? response.user.photoURL : './../../assets/user-profile.png'
+          }
+          this.loginUser(user)
           this.$router.push('smarteam')
         })
         .catch((e) => {
           console.log(e)
         })
+    },
+    updateUser (response) {
+      response.user.updateProfile({
+        displayName: this.form.name,
+        photoURL: './../../assets/user-profile.png'
+      }).then(user => {
+        console.log(user)
+      }).catch(error => {
+        console.log(error)
+      })
     }
   }
 }

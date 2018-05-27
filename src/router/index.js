@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import routes from './routes'
-import store from './../store'
 
 Vue.use(VueRouter)
 
@@ -22,14 +21,18 @@ const Router = new VueRouter({
   routes
 })
 
+const uid = JSON.parse(localStorage.getItem('user')).uid
+
 Router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    console.log(store.state.user.hasUser)
-    if (store.state.user.hasUser) {
+    console.log(uid)
+    if (uid) {
       next()
     } else {
       next('/error')
     }
+  } else if ((to.path === '/' || to.path === '/cadastro') && uid) {
+    next('/smarteam')
   } else {
     next()
   }
