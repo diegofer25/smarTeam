@@ -6,6 +6,6 @@ export default {
     return state.user
   },
   userTheme (state) {
-    return state.user.configs.theme
+    return state.configs.theme
   }
 }

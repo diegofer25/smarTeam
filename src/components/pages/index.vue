@@ -44,7 +44,9 @@ export default {
     login () {
       firebase.app.auth().signInWithEmailAndPassword(this.form.email, this.form.password)
         .then(response => {
-          this.updateUser(response)
+          if (!response.user.displayName) {
+            this.updateUser(response)
+          }
           const user = {
             uid: response.user.uid,
             email: response.user.email,
@@ -52,7 +54,7 @@ export default {
             photo: response.user.photoURL ? response.user.photoURL : './../../assets/user-profile.png'
           }
           this.loginUser(user)
-          this.$router.push('smarteam')
+          this.$router.push('/home')
         })
         .catch((e) => {
           console.log(e)
@@ -63,7 +65,6 @@ export default {
         displayName: this.form.name,
         photoURL: './../../assets/user-profile.png'
       }).then(user => {
-        console.log(user)
       }).catch(error => {
         console.log(error)
       })

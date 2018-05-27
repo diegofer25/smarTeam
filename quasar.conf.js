@@ -20,7 +20,7 @@ module.exports = function (ctx) {
     supportIE: true,
     build: {
       scopeHoisting: true,
-      vueRouterMode: 'history',
+      vueRouterMode: 'hash',
       // vueCompiler: true,
       // gzip: true,
       // analyze: true,
@@ -58,7 +58,10 @@ module.exports = function (ctx) {
         'QItemMain',
         'QItemSide',
         'QSelect',
-        'QField'
+        'QField',
+        'QTooltip',
+        'QDialog',
+        'QBtnDropdown'
       ],
       directives: [
         'Ripple'

@@ -5,7 +5,7 @@ export default [
     component: () => import('components/pages/index')
   },
   {
-    path: '/smarteam',
+    path: '/home',
     component: () => import('components/pages/smarteam'),
     children: [
       { path: '/', component: () => import('components/templates/home') },
@@ -15,7 +15,7 @@ export default [
       requiresAuth: true
     }
   },
-  { // Always leave this as last one
+  {
     path: '*',
     component: () => import('components/pages/404')
   }

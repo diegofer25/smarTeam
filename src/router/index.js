@@ -21,18 +21,15 @@ const Router = new VueRouter({
   routes
 })
 
-const uid = JSON.parse(localStorage.getItem('user')).uid
-
 Router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    console.log(uid)
-    if (uid) {
+    if (JSON.parse(localStorage.getItem('user'))) {
       next()
     } else {
       next('/error')
     }
-  } else if ((to.path === '/' || to.path === '/cadastro') && uid) {
-    next('/smarteam')
+  } else if ((to.path === '/' || to.path === '/cadastro') && JSON.parse(localStorage.getItem('user'))) {
+    next('/home')
   } else {
     next()
   }

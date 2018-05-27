@@ -7,15 +7,25 @@
         <div slot="subtitle">Lamarão Softwares - {{year}} &copy;</div>
       </q-toolbar-title>
       <div>
-        <q-select
-          class="select"
-          float-label="Mudar Tema"
-          radio
-          toggle
-          v-model="selectedColor"
-          :options="colors"
-          @input="themeChange"
-        />
+        <q-btn-dropdown split :label="selectedColor">
+          <!-- dropdown content -->
+          <q-list>
+            <q-item v-for="(color, index) in colors" :key="index">
+              <q-item-side>
+                <q-btn
+                  @click="themeChange(color)"
+                  size="xs"
+                  push
+                  round
+                  :color="color.value">
+                </q-btn>
+              </q-item-side>
+              <q-item-main>
+                <q-item-tile label>{{color.label}}</q-item-tile>
+              </q-item-main>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
       </div>
     </q-toolbar>
   </q-layout-footer>
@@ -27,7 +37,7 @@ export default {
   data () {
     return {
       year: new Date().getFullYear(),
-      selectedColor: this.themeColor,
+      selectedColor: '',
       colors: [
         { label: 'Azul', value: 'primary' },
         { label: 'Verde', value: 'positive' },
@@ -38,9 +48,17 @@ export default {
       ]
     }
   },
+  mounted: function () {
+    this.colors.forEach(color => {
+      if (this.themeColor === color.value) {
+        this.selectedColor = color.label
+      }
+    })
+  },
   methods: {
-    themeChange () {
-      this.$emit('themeChange', this.selectedColor)
+    themeChange (color) {
+      this.selectedColor = color.label
+      this.$emit('themeChange', color.value)
     }
   }
 }
