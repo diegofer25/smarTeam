@@ -1,6 +1,7 @@
 <template>
 
   <q-layout-drawer
+    side="left"
     :mini="isMini"
     v-model="leftDrawerOpen">
 

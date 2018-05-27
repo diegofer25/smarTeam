@@ -52,12 +52,21 @@ export default {
   name: 'LayoutDefault',
   data () {
     return {
-      leftDrawerOpen: this.$q.platform.is.desktop,
+      desktop: this.$q.platform.is.desktop,
+      mobile: this.$q.platform.is.mobile,
       isMini: true
     }
   },
   computed: {
-    ...mapGetters(['userTheme'])
+    ...mapGetters(['userTheme']),
+    leftDrawerOpen: {
+      get: function () {
+        return this.desktop ? this.desktop : this.mobile
+      },
+      set: function (newValue) {
+        this.desktop ? this.desktop = newValue : this.mobile = newValue
+      }
+    }
   },
   methods: {
     ...mapActions(['setTheme']),
@@ -77,19 +86,16 @@ export default {
 </script>
 
 <style>
-  .main-content {
-    background-color: rgba(173, 216, 230, 0.3);
-  }
   .q-layout-page{
     min-height: calc(92.2vh - 50px) !important;
   }
   .fade-enter-active, .fade-leave-active {
     transition-property: opacity;
-    transition-duration: .25s;
+    transition-duration: .4s;
   }
 
   .fade-enter-active {
-    transition-delay: .25s;
+    transition-delay: .4s;
   }
 
   .fade-enter, .fade-leave-active {

@@ -2,8 +2,8 @@
   <q-layout-footer>
     <q-toolbar
       glossy
-      :color="themeColor"
-    >
+      :color="themeColor">
+
       <q-toolbar-title>
         <div slot="subtitle">Lamarão Softwares - {{year}} &copy;</div>
       </q-toolbar-title>
@@ -14,7 +14,7 @@
             <q-item v-for="(color, index) in colors" :key="index">
               <q-item-side>
                 <q-btn
-                  @click="themeChange(color)"
+                  @click.stop="themeChange(color)"
                   size="xs"
                   push
                   round

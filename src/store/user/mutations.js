@@ -1,4 +1,5 @@
 export default {
+
   loginUser: (state, value) => {
     localStorage.setItem('user', JSON.stringify(value))
     state.user.id = value.uid
@@ -18,5 +19,9 @@ export default {
   setTheme: (state, value) => {
     window.localStorage.setItem('theme', value)
     state.configs.theme = value
+  },
+
+  setDataChart: (state, value) => {
+    state.dataChart = value
   }
 }
