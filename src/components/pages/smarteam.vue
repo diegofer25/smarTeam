@@ -8,13 +8,30 @@
     </stheader>
 
     <stdrawer
-      :leftDrawerOpen="leftDrawerOpen">
+      :leftDrawerOpen="leftDrawerOpen"
+      :isMini="isMini">
     </stdrawer>
 
+    <q-page-sticky
+      v-if="leftDrawerOpen"
+      position="top-left"
+      :offset="[10, 10]">
+      <q-btn
+        size="sm"
+        round
+        push
+        :color="userTheme"
+        :icon="isMini ? 'arrow_forward' : 'arrow_back'"
+        @click="isMini = !isMini">
+      </q-btn>
+    </q-page-sticky>
+
     <q-page-container class="main-content">
+
       <transition name="fade">
         <router-view />
       </transition>
+
     </q-page-container>
 
     <stfooter
@@ -35,7 +52,8 @@ export default {
   name: 'LayoutDefault',
   data () {
     return {
-      leftDrawerOpen: this.$q.platform.is.desktop
+      leftDrawerOpen: this.$q.platform.is.desktop,
+      isMini: true
     }
   },
   computed: {

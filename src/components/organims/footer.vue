@@ -1,13 +1,14 @@
 <template>
   <q-layout-footer>
     <q-toolbar
+      glossy
       :color="themeColor"
     >
       <q-toolbar-title>
         <div slot="subtitle">Lamarão Softwares - {{year}} &copy;</div>
       </q-toolbar-title>
       <div>
-        <q-btn-dropdown split :label="selectedColor">
+        <q-btn-dropdown v-model="opened" split :label="'Tema: ' + selectedColor">
           <!-- dropdown content -->
           <q-list>
             <q-item v-for="(color, index) in colors" :key="index">
@@ -45,7 +46,8 @@ export default {
         { label: 'Vermelho', value: 'negative' },
         { label: 'Laranja', value: 'warning' },
         { label: 'Dark', value: 'dark' }
-      ]
+      ],
+      opened: false
     }
   },
   mounted: function () {
@@ -59,6 +61,7 @@ export default {
     themeChange (color) {
       this.selectedColor = color.label
       this.$emit('themeChange', color.value)
+      this.opened = !this.opened
     }
   }
 }

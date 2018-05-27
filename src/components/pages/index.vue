@@ -21,7 +21,7 @@
 </style>
 
 <script>
-import firebase from './../../plugins/firebase'
+import firebase from './../../firebase'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {

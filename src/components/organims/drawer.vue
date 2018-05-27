@@ -1,6 +1,7 @@
 <template>
+
   <q-layout-drawer
-    :mini="miniState"
+    :mini="isMini"
     v-model="leftDrawerOpen">
 
     <q-list
@@ -25,36 +26,17 @@
         <q-item-main label="Criar Equipe"></q-item-main>
       </q-item>
 
-      <q-item>
-        <q-item-side>
-          <q-btn
-            v-if="!mobile"
-            size="xs"
-            round
-            :color="userTheme"
-            :icon="miniState ? 'arrow_forward' : 'arrow_back'"
-            @click.stop="miniState = !miniState">
-          </q-btn>
-        </q-item-side>
-        <q-item-main label="Mini Mode"></q-item-main>
-      </q-item>
-
     </q-list>
 
   </q-layout-drawer>
+
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 
 export default {
-  props: ['leftDrawerOpen'],
-  data () {
-    return {
-      miniState: false,
-      mobile: this.$q.platform.is.mobile
-    }
-  },
+  props: ['leftDrawerOpen', 'isMini'],
   computed: {
     ...mapGetters(['userTheme'])
   }

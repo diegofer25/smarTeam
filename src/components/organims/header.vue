@@ -1,7 +1,8 @@
 <template>
   <q-layout-header>
     <q-toolbar
-      class="text-gray"
+      glossy
+      class="main-header"
       :color="themeColor">
       <q-btn
         flat
@@ -12,7 +13,7 @@
         <q-icon name="menu"/>
       </q-btn>
 
-      <q-toolbar-title>
+      <q-toolbar-title class="toolbar-title">
         SmarTeam
         <div slot="subtitle">Um gerenciador de equipes inteligente</div>
       </q-toolbar-title>
@@ -30,14 +31,14 @@
       v-model="confirm"
       prevent-close
       @ok="confirmLogoff">
-      <!-- This or use "title" prop on <q-dialog> -->
+
       <span slot="title">Confirmar Saida</span>
-      <!-- This or use "message" prop on <q-dialog> -->
+
       <span slot="message">Deseja mesmo fazer logoff?</span>
 
       <template slot="buttons" slot-scope="props">
-        <q-btn :color="userTheme" label="Não" @click="props.cancel" />
-        <q-btn :color="userTheme" label="Sim" @click="props.ok" />
+        <q-btn push :color="userTheme" label="Não" @click="props.cancel" />
+        <q-btn push :color="userTheme" label="Sim" @click="props.ok" />
       </template>
     </q-dialog>
   </q-layout-header>
@@ -68,3 +69,12 @@ export default {
   }
 }
 </script>
+
+<style>
+  .main-header {
+    min-height: 65px;
+  }
+  .toolbar-title {
+    text-align: center;
+  }
+</style>
