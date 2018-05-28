@@ -1,20 +1,32 @@
 <template>
-  <q-layout view="hHh Lpr lFf">
-    <q-page-container>
-      <q-page class="flex">
-          <div class="row">
-            <div class="col-10 offset-1">
-              <q-btn
-                icon="exit_to_app"
-                label="Login"
-                push
-                :color="userTheme"
-                @click.stop="login"/>
-            </div>
+  <div id="main-login">
+    <div class="index-video-wrapper">
+      <video autoplay loop id="index-video">
+        <source src="./../../statics/work-space.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="row text-white">
+      <div class="col-10 offset-1">
+        <div class="row text-center">
+          <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+            <h2>SmarTeam</h2>
+            <h4>Teaser</h4>
           </div>
-      </q-page>
-    </q-page-container>
-  </q-layout>
+        </div>
+        <div class="row text-center">
+          <q-btn
+            class="col-sm-10 offset-sm-1 col-md-6 offset-md-3 col-lg-2 offset-lg-5"
+            icon="exit_to_app"
+            label="Login"
+            push
+            size="lg"
+            :color="userTheme"
+            @click.stop="login">
+          </q-btn>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style>
@@ -72,3 +84,28 @@ export default {
   }
 }
 </script>
+
+<style>
+  #main-login {
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, .4);
+  }
+
+  #index-video {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: -100;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    overflow: hidden;
+  }
+
+  .index-video-wrapper {
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+  }
+</style>

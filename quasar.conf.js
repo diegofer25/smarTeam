@@ -11,7 +11,7 @@ module.exports = function (ctx) {
       'app.styl'
     ],
     extras: [
-      ctx.theme.mat ? 'roboto-font' : null,
+      'roboto-font',
       'material-icons',
       ctx.theme.ios ? 'ionicons' : null
       // 'mdi',
@@ -20,7 +20,7 @@ module.exports = function (ctx) {
     supportIE: true,
     build: {
       scopeHoisting: true,
-      vueRouterMode: 'hash',
+      vueRouterMode: 'history',
       // vueCompiler: true,
       // gzip: true,
       // analyze: true,
@@ -71,10 +71,7 @@ module.exports = function (ctx) {
         'QCardSeparator',
         'QCardActions',
         'QTable',
-        'QTh',
-        'QTr',
-        'QTd',
-        'QTableColumns'
+        'QSearch'
       ],
       directives: [
         'Ripple'
@@ -83,7 +80,7 @@ module.exports = function (ctx) {
       plugins: [
         'Notify'
       ],
-      iconSet: ctx.theme.mat ? 'material-icons' : 'ionicons'
+      iconSet: 'material-icons'
     },
     // animations: 'all' --- includes all animations
     animations: [

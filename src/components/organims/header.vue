@@ -22,7 +22,7 @@
         @click.stop="confirm = !confirm"
         flat round dense icon="exit_to_app">
         <q-tooltip>
-          Sair
+          Logoff
         </q-tooltip>
       </q-btn>
     </q-toolbar>
@@ -32,7 +32,7 @@
       prevent-close
       @ok="confirmLogoff">
 
-      <span slot="title">Confirmar Saida</span>
+      <span slot="title">Confirmação de Saida</span>
 
       <span slot="message">Deseja mesmo fazer logoff?</span>
 
