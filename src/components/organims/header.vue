@@ -76,5 +76,6 @@ export default {
   }
   .toolbar-title {
     text-align: center;
+    font-size: 1.6em;
   }
 </style>

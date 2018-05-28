@@ -20,7 +20,7 @@
       </q-item>
 
       <q-item
-        to="/criarequipe">
+        to="/gerenciarequipe">
         <q-item-side>
           <q-icon name="library_add"></q-icon>
         </q-item-side>

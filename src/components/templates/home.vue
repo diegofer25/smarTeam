@@ -34,9 +34,6 @@ export default {
 </script>
 
 <style scoped>
-  .teste {
-    color: #ffff00
-  }
   .panel-title {
     padding: 10px;
   }

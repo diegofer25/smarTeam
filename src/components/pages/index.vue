@@ -8,7 +8,7 @@
                 icon="exit_to_app"
                 label="Login"
                 push
-                color="primary"
+                :color="userTheme"
                 @click.stop="login"/>
             </div>
           </div>
@@ -37,7 +37,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['hasUser'])
+    ...mapGetters(['hasUser', 'userTheme'])
   },
   methods: {
     ...mapActions(['loginUser']),

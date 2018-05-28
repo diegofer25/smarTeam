@@ -9,7 +9,7 @@ export default [
     component: () => import('components/pages/smarteam'),
     children: [
       { path: '/', component: () => import('components/templates/home') },
-      { path: '/criarequipe', component: () => import('components/templates/createteam') }
+      { path: '/gerenciarequipe', component: () => import('components/templates/teammanager') }
     ],
     meta: {
       requiresAuth: true

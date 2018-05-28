@@ -49,7 +49,7 @@ import stfooter from './../organims/footer'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: 'LayoutDefault',
+  name: 'SmarTeamLayout',
   data () {
     return {
       desktop: this.$q.platform.is.desktop,
