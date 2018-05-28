@@ -24,7 +24,7 @@
         <q-item-side>
           <q-icon name="library_add"></q-icon>
         </q-item-side>
-        <q-item-main label="Criar Equipe"></q-item-main>
+        <q-item-main label="Gerenciar Equipe"></q-item-main>
       </q-item>
 
     </q-list>

@@ -71,7 +71,9 @@ module.exports = function (ctx) {
         'QCardSeparator',
         'QCardActions',
         'QTable',
-        'QSearch'
+        'QSearch',
+        'QFab',
+        'QFabAction'
       ],
       directives: [
         'Ripple'

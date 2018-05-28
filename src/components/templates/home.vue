@@ -35,7 +35,7 @@ export default {
 
 <style>
   .panel-title {
-    padding: 10px;
-    padding-left: 75px;
+    padding: 20px;
+    padding-left: 100px;
   }
 </style>
