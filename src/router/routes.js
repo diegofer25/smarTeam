@@ -25,8 +25,9 @@ export default [
             component: () => import('components/organism/pushmember')
           },
           {
-            path: '/removermembro',
-            component: () => import('components/organism/removemember')
+            path: '/removermembro/:userId',
+            component: () => import('components/organism/removemember'),
+            props: true
           }
         ]
       }

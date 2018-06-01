@@ -11,9 +11,9 @@
     </stdrawer>
 
     <q-page-sticky
-      v-if="!isMobile"
+      v-if="!isMobile && qDrawer"
       position="top-left"
-      :offset="[10, 10]">
+      :offset="[10, 23]">
       <q-btn
         size="sm"
         round

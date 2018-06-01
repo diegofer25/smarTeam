@@ -1,5 +1,5 @@
 <template>
-  <q-card inline>
+  <q-card flat>
     <q-card-main>
       <doughnut
         :chart-data="dataChart"

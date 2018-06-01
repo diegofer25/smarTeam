@@ -21,7 +21,12 @@ export default {
   },
 
   tableInfo (state) {
-    return state.table
+    const table = state.table
+    table.tableData = table.tableData.map(function (item) {
+      item.total = (item.doed + item.todo + item.doing)
+      return item
+    })
+    return table
   },
 
   isMini (state) {

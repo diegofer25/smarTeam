@@ -12,7 +12,9 @@
         </span>
       </div>
       <div class="row justify-around">
-        <router-view />
+        <transition name="slide-fade">
+          <router-view />
+        </transition>
       </div>
       <q-action-sheet
         v-model="actionSheet"
@@ -26,7 +28,6 @@
 </template>
 
 <script>
-import pushmember from './../organism/pushmember'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -36,19 +37,20 @@ export default {
   },
   data () {
     return {
+      userId: 123321123,
       actionSheet: false,
       actions: [
         {
           label: 'Adicionar Membro',
           icon: 'person_add',
           value: 'add',
-          color: 'grey'
+          color: 'brown'
         },
         {
           label: 'Remover Membro',
           icon: 'remove_circle',
           value: 'remove',
-          color: 'grey'
+          color: 'brown'
         }
       ]
     }
@@ -56,17 +58,13 @@ export default {
   methods: {
     managerAction (item) {
       if (item.value === 'add') {
-        this.$router.push('adicionarmembro')
+        this.$router.push('/adicionarmembro')
       } else if (item.value === 'remove') {
         this.$router.push({
-          name: 'removermembro',
-          params: { uid: 'esseéumiddeexemplo' }
+          path: '/removermembro/' + this.userId
         })
       }
     }
-  },
-  components: {
-    pushmember
   }
 }
 </script>
@@ -75,5 +73,12 @@ export default {
   .panel-title {
     padding: 20px;
     padding-left: 100px;
+  }
+  .slide-fade-enter-active {
+    transition: .4s ease-out;
+  }
+  .slide-fade-enter, .slide-fade-leave-to {
+    transform: translateX(-1000px);
+    opacity: 0.5;
   }
 </style>
