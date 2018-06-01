@@ -2,6 +2,8 @@ const userData = JSON.parse(localStorage.getItem('user'))
 
 export default {
 
+  isMini: true,
+
   user: {
     id: userData ? userData.uid : '',
     name: userData ? userData.displayName : '',

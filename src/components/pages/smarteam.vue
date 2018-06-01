@@ -2,18 +2,16 @@
   <q-layout view="hHh Lpr lFf">
 
     <stheader
-      :leftDrawerOpen="leftDrawerOpen"
-      :themeColor="userTheme"
+      :qDrawer="qDrawer"
       @toggleDrawer="toggleDrawer">
     </stheader>
 
     <stdrawer
-      :leftDrawerOpen="leftDrawerOpen"
-      :isMini="isMini">
+      :qDrawer="qDrawer">
     </stdrawer>
 
     <q-page-sticky
-      v-if="leftDrawerOpen"
+      v-if="!isMobile"
       position="top-left"
       :offset="[10, 10]">
       <q-btn
@@ -21,57 +19,65 @@
         round
         push
         :color="userTheme"
-        :icon="isMini ? 'arrow_forward' : 'arrow_back'"
-        @click="isMini = !isMini">
+        :icon="isMini ? 'arrow_right' : 'arrow_left'"
+        @click="toggleMini">
       </q-btn>
     </q-page-sticky>
 
     <q-page-container class="main-content">
 
-      <transition name="fade">
+      <transition name="slide-fade">
         <router-view />
       </transition>
 
     </q-page-container>
 
-    <stfooter
-      :themeColor="userTheme"
-      @themeChange="themeChange">
+    <stfooter>
     </stfooter>
 
   </q-layout>
 </template>
 
 <script>
-import stheader from './../organims/header'
-import stdrawer from './../organims/drawer'
-import stfooter from './../organims/footer'
+import stheader from './../organism/header'
+import stdrawer from './../organism/drawer'
+import stfooter from './../organism/footer'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'SmarTeamLayout',
   data () {
     return {
-      desktop: this.$q.platform.is.desktop,
-      mobile: this.$q.platform.is.mobile,
-      isMini: true
+      isDesktop: this.$q.platform.is.desktop,
+      isMobile: this.$q.platform.is.mobile
     }
   },
   computed: {
-    ...mapGetters(['userTheme']),
-    leftDrawerOpen: {
+    ...mapGetters([
+      'userTheme',
+      'isMini'
+    ]),
+    qDrawer: {
       get: function () {
-        return this.desktop ? this.desktop : this.mobile
+        return this.isDesktop
       },
+
       set: function (newValue) {
-        this.desktop ? this.desktop = newValue : this.mobile = newValue
+        this.isDesktop = newValue
       }
     }
   },
   methods: {
-    ...mapActions(['setTheme']),
-    toggleDrawer () {
-      this.leftDrawerOpen = !this.leftDrawerOpen
+    ...mapActions([
+      'setTheme',
+      'setDevice',
+      'setMini'
+    ]),
+    toggleDrawer (value) {
+      this.qDrawer = value
+    },
+    toggleMini () {
+      this.setMini(!this.isMini)
     },
     themeChange (color) {
       this.setTheme(color)
@@ -86,19 +92,11 @@ export default {
 </script>
 
 <style>
-  .q-layout-page{
-    min-height: calc(92.2vh - 50px) !important;
+  .slide-fade-enter-active {
+    transition: .4s ease-out;
   }
-  .fade-enter-active, .fade-leave-active {
-    transition-property: opacity;
-    transition-duration: .4s;
-  }
-
-  .fade-enter-active {
-    transition-delay: .4s;
-  }
-
-  .fade-enter, .fade-leave-active {
-    opacity: 0
+  .slide-fade-enter, .slide-fade-leave-to {
+    transform: translateX(-1000px);
+    opacity: 0.5;
   }
 </style>

@@ -22,5 +22,9 @@ export default {
 
   tableInfo (state) {
     return state.table
+  },
+
+  isMini (state) {
+    return state.isMini
   }
 }

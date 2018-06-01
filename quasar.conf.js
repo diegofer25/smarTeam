@@ -73,7 +73,8 @@ module.exports = function (ctx) {
         'QTable',
         'QSearch',
         'QFab',
-        'QFabAction'
+        'QFabAction',
+        'QActionSheet'
       ],
       directives: [
         'Ripple'

@@ -2,7 +2,7 @@
   <div id="main-login">
     <div class="index-video-wrapper">
       <video autoplay loop id="index-video">
-        <source src="./../../statics/work-space.mp4" type="video/mp4">
+        <source src="./../../statics/videos/workingspace.webm" type="video/webm">
       </video>
     </div>
     <div class="row text-white">

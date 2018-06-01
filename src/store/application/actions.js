@@ -14,5 +14,9 @@ export default {
 
   setDataChart: ({ commit }, value) => {
     commit('setDataChart', value)
+  },
+
+  setMini: ({ commit }, value) => {
+    commit('setMini', value)
   }
 }

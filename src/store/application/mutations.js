@@ -23,5 +23,9 @@ export default {
 
   setDataChart: (state, value) => {
     state.dataChart = value
+  },
+
+  setMini: (state, value) => {
+    state.isMini = value
   }
 }
