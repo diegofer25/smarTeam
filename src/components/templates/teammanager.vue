@@ -3,28 +3,21 @@
     <div class="col-12">
       <div class="row justify-around">
         <span class="col-10 panel-title">
-          <q-btn
-            push
-            :icon="actionSheet ? 'close' : 'view_module'"
-            :color="userTheme"
-            @click.stop="actionSheet = !actionSheet"> Gerenciar Equipe
+          <q-btn push :icon="actionSheet ? 'close' : 'view_module'"
+            :color="userTheme" @click.stop="actionSheet = !actionSheet">
+            Gerenciar Equipe
           </q-btn>
         </span>
       </div>
-      <div class="row justify-around">
-        <div class="col-10">
+      <div class="row">
+        <div class="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
           <transition name="slide-fade">
             <router-view />
           </transition>
         </div>
       </div>
-      <q-action-sheet
-        v-model="actionSheet"
-        title="Açõs Gerenciais"
-        grid
-        @ok="managerAction"
-        :actions="actions"
-      />
+      <q-action-sheet v-model="actionSheet" title="Açõs Gerenciais" grid
+        @ok="managerAction" :actions="actions"/>
     </div>
   </div>
 </template>

@@ -1,12 +1,14 @@
 import setValidate from './stateValidate'
-import isEmpty from './validations/isEmpt'
-import isValidName from './validations/isValidName'
-import isValidCpf from './validations/isValidCpf'
-import isValidEmail from './validations/isValidEmail'
-import isValidPassword from './validations/isValidPassword'
+import {
+  isFormEmpty,
+  isValidCpf,
+  isValidEmail,
+  isValidName,
+  isValidPassword
+} from './../validations/'
 
 export default (values) => {
-  if (!isEmpty(values)) {
+  if (!isFormEmpty(values)) {
     if (!isValidName(values.name)) {
       return setValidate('warning', 'Forneça pelo menos um sobrenome', false)
     } else if (!isValidCpf(values.cpf)) {

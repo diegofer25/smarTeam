@@ -67,5 +67,14 @@ export default {
       { name: 'Eber', doed: 2, doing: 1, todo: 3, total: 0 },
       { name: 'Marcell', doed: 1, doing: 3, todo: 3, total: 0 }
     ]
+  },
+
+  form: {
+    name: '',
+    email: '',
+    cpf: '',
+    password: '',
+    confirmPassword: '',
+    isAdmin: ''
   }
 }

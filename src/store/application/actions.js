@@ -18,5 +18,9 @@ export default {
 
   setMini: ({ commit }, value) => {
     commit('setMini', value)
+  },
+
+  setForm: ({ commit }, value) => {
+    commit('setForm', value)
   }
 }

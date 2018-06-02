@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import doughnut from '../atoms/doughnut.js'
+import { doughnut } from './../charts/'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {

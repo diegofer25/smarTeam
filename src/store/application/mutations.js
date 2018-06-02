@@ -27,5 +27,9 @@ export default {
 
   setMini: (state, value) => {
     state.isMini = value
+  },
+
+  setForm: (state, value) => {
+    state.form = value
   }
 }

@@ -31,5 +31,9 @@ export default {
 
   isMini (state) {
     return state.isMini
+  },
+
+  form (state) {
+    return state.form
   }
 }
