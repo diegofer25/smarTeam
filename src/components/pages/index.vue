@@ -33,7 +33,7 @@
 </style>
 
 <script>
-import firebase from './../../services/firebase'
+import { app } from './../../services/firebase/'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -54,7 +54,7 @@ export default {
   methods: {
     ...mapActions(['loginUser']),
     login () {
-      firebase.app.auth().signInWithEmailAndPassword(this.form.email, this.form.password)
+      app.auth().signInWithEmailAndPassword(this.form.email, this.form.password)
         .then(response => {
           if (!response.user.displayName) {
             this.updateUser(response)

@@ -2,7 +2,7 @@
   <div class="row q-px-lg q-pt-md">
     <div class="col-sm-12 q-pa-sm">
       <q-field :count="50">
-        <q-input type="text" :maxlength="50" float-label="Nome Completo" placeholder="Ex: Fulado de Tal"
+        <q-input autofocus type="text" :maxlength="50" float-label="Nome Completo" placeholder="Ex: Fulado de Tal"
           v-model="form.name"/>
       </q-field>
     </div>

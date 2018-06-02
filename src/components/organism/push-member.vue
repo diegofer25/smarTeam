@@ -24,10 +24,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import formmember from './../molecules/form-member'
 import validateform from './../bosons/validate-form/member-form/'
 import notify from './../bosons/notify'
+import { db } from './../../services/firebase/'
 
 export default {
   name: 'PushMember',
@@ -35,15 +36,53 @@ export default {
     ...mapGetters(['userTheme', 'form']),
     validation: function () {
       return validateform(this.form)
+    },
+    formatedForm () {
+      const form = this.form
+      return {
+        name: form.name,
+        email: form.email,
+        cpf: form.cpf,
+        password: form.password,
+        isAdmin: form.isAdmin
+      }
     }
   },
   methods: {
+    ...mapActions(['setForm']),
     validate () {
       if (this.validation.isValidate) {
-        notify('Cadastrado, fim do teste :D', 'positive')
+        this.pushMember()
       } else {
-        notify(this.validation.message, 'warning')
+        notify(this.validation.message, this.validation.type)
       }
+    },
+    pushMember () {
+      this.$q.loading.show({ delay: 400 })
+      db.functions.pushMember(this.formatedForm)
+        .then(response => {
+          this.processResponse(response)
+        })
+    },
+    processResponse (response) {
+      if (response.status) {
+        this.clearForm()
+        notify(response.message, 'positive')
+        this.$router.push('gerenciarequipe')
+      } else {
+        notify(response.message, 'negative')
+      }
+      this.$q.loading.hide()
+    },
+    clearForm () {
+      this.setForm({
+        name: '',
+        email: '',
+        cpf: '',
+        password: '',
+        confirmPassword: '',
+        isAdmin: ''
+      })
     }
   },
   components: {
