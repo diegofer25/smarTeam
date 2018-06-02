@@ -22,9 +22,6 @@ const Router = new VueRouter({
 })
 
 Router.beforeEach((to, from, next) => {
-  console.log(to)
-  console.log(from)
-  console.log(next)
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (JSON.parse(localStorage.getItem('user'))) {
       next()

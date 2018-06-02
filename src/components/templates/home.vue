@@ -1,8 +1,8 @@
 <template>
   <div class="row">
     <div class="col-12">
-      <div class="row">
-        <span class="q-title col-12 panel-title">Painel de Amostra</span>
+      <div class="row justify-around">
+        <span class="col-10 panel-title">Painel de Exemplo</span>
       </div>
       <div class="row">
         <div class="col-sm-12 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
@@ -35,7 +35,6 @@ export default {
 
 <style>
   .panel-title {
-    padding: 20px;
-    padding-left: 100px;
+    padding: 15px 0 10px 0;
   }
 </style>

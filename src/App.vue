@@ -1,6 +1,8 @@
 <template>
   <div id="q-app">
-    <router-view />
+    <transition name="slide-fade">
+      <router-view />
+    </transition>
   </div>
 </template>
 
@@ -11,4 +13,11 @@ export default {
 </script>
 
 <style>
+  .slide-fade-enter-active {
+    transition: .4s ease-out;
+  }
+  .slide-fade-enter, .slide-fade-leave-to {
+    transform: translateX(-1000px);
+    opacity: 0.5;
+  }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div class="row" style="min-height: 100vh;">
     <div class="col-12">
-      <div class="row main justify-around">
-        <span class="q-title col-12 panel-title">
+      <div class="row justify-around">
+        <span class="col-10 panel-title">
           <q-btn
             push
             :icon="actionSheet ? 'close' : 'view_module'"
@@ -12,9 +12,11 @@
         </span>
       </div>
       <div class="row justify-around">
-        <transition name="slide-fade">
-          <router-view />
-        </transition>
+        <div class="col-10">
+          <transition name="slide-fade">
+            <router-view />
+          </transition>
+        </div>
       </div>
       <q-action-sheet
         v-model="actionSheet"
@@ -71,8 +73,7 @@ export default {
 
 <style>
   .panel-title {
-    padding: 20px;
-    padding-left: 100px;
+    padding: 15px 0 10px 0;
   }
   .slide-fade-enter-active {
     transition: .4s ease-out;

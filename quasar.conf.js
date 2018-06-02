@@ -60,6 +60,7 @@ module.exports = function (ctx) {
         'QItemSide',
         'QSelect',
         'QField',
+        'QInput',
         'QTooltip',
         'QDialog',
         'QBtnDropdown',
@@ -74,7 +75,9 @@ module.exports = function (ctx) {
         'QSearch',
         'QFab',
         'QFabAction',
-        'QActionSheet'
+        'QActionSheet',
+        'QToggle',
+        'QAlert'
       ],
       directives: [
         'Ripple'
