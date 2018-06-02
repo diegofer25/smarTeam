@@ -25,7 +25,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import formmember from './../molecules/formmember'
+import formmember from './../molecules/form-member'
 import validateform from './../bosons/validate-form/member-form/'
 import notify from './../bosons/notify'
 

@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import chartstatus from './../molecules/chartstatus'
-import teamtable from './../molecules/teamtable'
+import chartstatus from './../molecules/chart-status'
+import teamtable from './../molecules/team-table'
 import { mapGetters } from 'vuex'
 
 export default {

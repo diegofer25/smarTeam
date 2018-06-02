@@ -14,19 +14,19 @@ export default [
       },
       {
         path: '/gerenciarequipe',
-        component: () => import('components/templates/teammanager'),
+        component: () => import('components/templates/team-manager'),
         children: [
           {
             path: '/',
-            component: () => import('components/organism/teampanel')
+            component: () => import('components/organism/team-panel')
           },
           {
             path: '/adicionarmembro',
-            component: () => import('components/organism/pushmember')
+            component: () => import('components/organism/push-member')
           },
           {
             path: '/removermembro/:userId',
-            component: () => import('components/organism/removemember'),
+            component: () => import('components/organism/remove-member'),
             props: true
           }
         ]

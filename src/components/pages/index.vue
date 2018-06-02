@@ -33,7 +33,7 @@
 </style>
 
 <script>
-import firebase from './../../firebase'
+import firebase from './../../services/firebase'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
