@@ -16,11 +16,7 @@
         <div class="row text-center">
           <q-btn
             class="col-sm-10 offset-sm-1 col-md-6 offset-md-3 col-lg-2 offset-lg-5"
-            icon="exit_to_app"
-            label="Login"
-            push
-            size="lg"
-            :color="userTheme"
+            icon="exit_to_app" label="Login" push size="lg" :color="userTheme"
             @click.stop="login">
           </q-btn>
         </div>
@@ -33,8 +29,9 @@
 </style>
 
 <script>
-import { app } from './../../services/firebase/'
 import { mapGetters, mapActions } from 'vuex'
+import firebase from './../../services/firebase/'
+import loading from './../bosons/loading'
 
 export default {
   name: 'PageIndex',
@@ -54,19 +51,20 @@ export default {
   methods: {
     ...mapActions(['loginUser']),
     login () {
-      app.auth().signInWithEmailAndPassword(this.form.email, this.form.password)
+      loading.show('Aguarde, realizando login', this.userTheme)
+      firebase.app.auth().signInWithEmailAndPassword(this.form.email, this.form.password)
         .then(response => {
           if (!response.user.displayName) {
             this.updateUser(response)
           }
-          const user = {
+          this.loginUser({
             uid: response.user.uid,
             email: response.user.email,
             displayName: response.user.displayName ? response.user.displayName : this.form.name,
             photo: response.user.photoURL ? response.user.photoURL : './../../assets/user-profile.png'
-          }
-          this.loginUser(user)
+          })
           this.$router.push('/home')
+          loading.hide()
         })
         .catch((e) => {
           console.log(e)

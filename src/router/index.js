@@ -25,11 +25,15 @@ Router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (JSON.parse(localStorage.getItem('user'))) {
       next()
+    } else if (to.path === '/-1') {
+      next('/')
     } else {
       next('/error')
     }
   } else if ((to.path === '/' || to.path === '/cadastro') && JSON.parse(localStorage.getItem('user'))) {
     next('/home')
+  } else if (to.path === '/-1') {
+    next('/')
   } else {
     next()
   }

@@ -3,4 +3,6 @@ import database from './database/'
 
 export const db = database
 
-export const app = firebase.app
+export default {
+  app: firebase
+}

@@ -19,13 +19,16 @@
           </q-btn>
         </div>
       </div>
+      <q-inner-loading :visible="isLoading">
+        <q-spinner-facebook size="100px" :color="userTheme" />
+      </q-inner-loading>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import formmember from './../molecules/form-member'
+import formmember from './../molecules/form'
 import validateform from './../bosons/validate-form/member-form/'
 import notify from './../bosons/notify'
 import { db } from './../../services/firebase/'
@@ -48,17 +51,22 @@ export default {
       }
     }
   },
+  data () {
+    return {
+      isLoading: false
+    }
+  },
   methods: {
     ...mapActions(['setForm']),
     validate () {
       if (this.validation.isValidate) {
+        this.isLoading = true
         this.pushMember()
       } else {
         notify(this.validation.message, this.validation.type)
       }
     },
     pushMember () {
-      this.$q.loading.show({ delay: 400 })
       db.functions.pushMember(this.formatedForm)
         .then(response => {
           this.processResponse(response)
@@ -72,7 +80,7 @@ export default {
       } else {
         notify(response.message, 'negative')
       }
-      this.$q.loading.hide()
+      this.isLoading = false
     },
     clearForm () {
       this.setForm({

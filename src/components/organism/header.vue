@@ -11,6 +11,20 @@
         aria-label="Menu">
         <q-icon name="menu"/>
       </q-btn>
+      <div class="q-ml-lg" v-if="$q.platform.is.desktop">
+        <q-btn dense round push icon="navigate_before" size="sm"
+          :color="userTheme" @click="$router.go(-1)">
+          <q-tooltip anchor="bottom middle" self="top middle">
+            voltar
+          </q-tooltip>
+        </q-btn>
+        <q-btn dense round push icon="navigate_next" size="sm"
+          :color="userTheme" @click="$router.go(1)">
+          <q-tooltip anchor="bottom middle" self="top middle">
+            Avançar
+          </q-tooltip>
+        </q-btn>
+      </div>
 
       <q-toolbar-title class="toolbar-title">
         SmarTeam
@@ -20,7 +34,7 @@
       <q-btn
         @click.stop="confirm = !confirm"
         flat round dense icon="exit_to_app">
-        <q-tooltip>
+        <q-tooltip anchor="bottom middle" self="top middle">
           Logoff
         </q-tooltip>
       </q-btn>
@@ -45,6 +59,8 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import firebase from './../../services/firebase/'
+import loading from './../bosons/loading'
 
 export default {
   props: ['qDrawer'],
@@ -62,8 +78,17 @@ export default {
       this.$emit('toggleDrawer', !this.qDrawer)
     },
     confirmLogoff () {
-      this.logOff()
-      this.$router.push('/')
+      const vm = this
+      loading.show('Até a próxima', this.userTheme)
+      firebase.app.auth().signOut().then(function () {
+        vm.logOff()
+        setTimeout(function () {
+          loading.hide()
+          vm.$router.push('/')
+        }, 800)
+      }, function (error) {
+        console.log(error)
+      })
     }
   }
 }

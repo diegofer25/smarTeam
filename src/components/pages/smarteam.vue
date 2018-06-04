@@ -1,48 +1,32 @@
 <template>
   <q-layout view="hHh Lpr lFf">
 
-    <stheader
-      :qDrawer="qDrawer"
-      @toggleDrawer="toggleDrawer">
-    </stheader>
+    <stheader :qDrawer="qDrawer" @toggleDrawer="toggleDrawer" />
 
-    <stdrawer
-      :qDrawer="qDrawer">
-    </stdrawer>
+    <stdrawer :qDrawer="qDrawer" />
 
-    <q-page-sticky
-      v-if="!isMobile && qDrawer"
-      position="top-left"
-      :offset="[10, 23]">
-      <q-btn
-        size="sm"
-        round
-        push
-        :color="userTheme"
-        :icon="isMini ? 'arrow_right' : 'arrow_left'"
+    <q-page-sticky v-if="!isMobile && qDrawer" position="top-left" :offset="[10, 23]">
+      <q-btn size="sm" round push :color="userTheme" :icon="isMini ? 'arrow_right' : 'arrow_left'"
         @click="toggleMini">
       </q-btn>
     </q-page-sticky>
 
     <q-page-container class="main-content">
-
       <transition name="slide-fade">
         <router-view />
       </transition>
-
     </q-page-container>
 
-    <stfooter>
-    </stfooter>
+    <stfooter />
 
   </q-layout>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import stheader from './../organism/header'
 import stdrawer from './../organism/drawer'
 import stfooter from './../organism/footer'
-import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'SmarTeamLayout',

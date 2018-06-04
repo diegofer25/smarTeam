@@ -1,5 +1,13 @@
-import verifyMember from './push-member'
+import pushMember from './push-member'
+import getMembers from './get-members'
+import getTasks from './get-tasks'
+import addTask from './add-task'
+import deleteTask from './delete-task'
 
 export default {
-  verifyMember
+  pushMember,
+  getMembers,
+  getTasks,
+  addTask,
+  deleteTask
 }

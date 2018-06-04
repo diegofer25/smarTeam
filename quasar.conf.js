@@ -77,7 +77,10 @@ module.exports = function (ctx) {
         'QFabAction',
         'QActionSheet',
         'QToggle',
-        'QAlert'
+        'QAlert',
+        'QInnerLoading',
+        'QSpinnerFacebook',
+        'QCollapsible'
       ],
       directives: [
         'Ripple'
@@ -91,6 +94,7 @@ module.exports = function (ctx) {
     },
     // animations: 'all' --- includes all animations
     animations: [
+      'fadeInUp'
     ],
     pwa: {
       // workboxPluginMode: 'InjectManifest',

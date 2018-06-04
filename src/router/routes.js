@@ -18,7 +18,7 @@ export default [
         children: [
           {
             path: '/',
-            component: () => import('components/organism/team-panel')
+            component: () => import('components/organism/team-overview')
           },
           {
             path: '/adicionarmembro',

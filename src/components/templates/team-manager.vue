@@ -1,5 +1,7 @@
 <template>
   <div class="row" style="min-height: 100vh;">
+    <q-action-sheet v-model="actionSheet" title="Açõs Gerenciais" grid
+        @ok="managerAction" :actions="actions"/>
     <div class="col-12">
       <div class="row justify-around">
         <span class="col-10 panel-title">
@@ -10,14 +12,12 @@
         </span>
       </div>
       <div class="row">
-        <div class="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
+        <div class="col-sm-12 col-md-10 offset-md-1 q-pa-sm">
           <transition name="slide-fade">
             <router-view />
           </transition>
         </div>
       </div>
-      <q-action-sheet v-model="actionSheet" title="Açõs Gerenciais" grid
-        @ok="managerAction" :actions="actions"/>
     </div>
   </div>
 </template>
