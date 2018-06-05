@@ -5,16 +5,22 @@
         <span class="q-title">Visão Geral</span>
       </div>
       <div class="row">
-        <members-collaps
-          :members="computedMembers"
-          :loading="computedLoading"/>
+        <transition-group enter-active-class="animated fadeInUp">
+          <div class="col-12" v-if="computedMembers.length > 0"
+            v-for="(member, index) of computedMembers" :key="index">
+            <members-collaps :member="member"
+              :loading="computedLoading"/>
+          </div>
+        </transition-group>
       </div>
+      <q-inner-loading :visible="loading">
+        <q-spinner-facebook size="100px" :color="userTheme" />
+      </q-inner-loading>
     </div>
   </div>
 </template>
 
 <script>
-import { db } from './../../services/firebase/'
 import { mapGetters, mapActions } from 'vuex'
 import notify from './../bosons/notify'
 import membersCollaps from './../molecules/members-collaps'
@@ -55,34 +61,10 @@ export default {
       this.members.then((response) => {
         if (response.status) {
           response.members.forEach(member => {
-            this.pushMember(member.data())
+            this.dataMembers.push(member.data())
           })
         } else {
           notify('Falha na comunicação com o servidor', 'negative')
-        }
-        this.loading = false
-      })
-    },
-    getTasks (member) {
-      this.loading = true
-      const request = {
-        email: member.email,
-        userId: this.user.id
-      }
-      return db.functions.getTasks(request)
-        .then((result) => {
-          this.loading = false
-          return result
-        })
-    },
-    pushMember (member) {
-      this.getTasks(member).then((result) => {
-        if (result.status) {
-          member['tasks'] = result.tasks
-          this.dataMembers.push(member)
-        } else {
-          console.log(result.error)
-          notify('Falha na comunicação com o servidor', 'Negative')
         }
         this.loading = false
       })

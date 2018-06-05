@@ -1,13 +1,14 @@
-export default (db, value) => {
-  return verifyMember(db, value)
+export default (db, request) => {
+  return verifyMember(db, request)
 }
 
-function verifyMember (db, member, userId) {
-  return db.collection('teams').doc().collection('members')
-    .where('email', '==', member.email).get()
+function verifyMember (db, request) {
+  console.log(request)
+  return db.collection('teams').doc(request.userId).collection('members')
+    .where('email', '==', request.form.email).get()
     .then(results => {
       if (results.docs.length === 0) {
-        return setMember(db, member)
+        return setMember(db, request)
       } else {
         return {
           status: false,
@@ -23,12 +24,13 @@ function verifyMember (db, member, userId) {
     })
 }
 
-function setMember (db, member) {
-  return db.collection('teams').doc().collection('members')
-    .doc(member.email).set(member)
+function setMember (db, request) {
+  return db.collection('teams').doc(request.userId).collection('members')
+    .doc(request.form.email).set(request.form)
     .then((teste) => {
-      const firstName = member.name.split(' ')[0]
-      return setEmptyTasks(db, member.email, firstName)
+      console.log(teste)
+      const firstName = request.form.name.split(' ')[0]
+      return setEmptyTasks(db, request, firstName)
     })
     .catch(() => {
       return {
@@ -38,9 +40,9 @@ function setMember (db, member) {
     })
 }
 
-function setEmptyTasks (db, email, name, team) {
-  return db.collection('teams').doc().collection('members')
-    .doc(email).collection('tasks').doc('tasks')
+function setEmptyTasks (db, request, name) {
+  return db.collection('teams').doc(request.userId).collection('members')
+    .doc(request.form.email).collection('tasks').doc('tasks')
     .set({
       tasks: []
     })

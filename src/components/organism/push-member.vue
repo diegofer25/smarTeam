@@ -36,7 +36,11 @@ import { db } from './../../services/firebase/'
 export default {
   name: 'PushMember',
   computed: {
-    ...mapGetters(['userTheme', 'form']),
+    ...mapGetters('application', [
+      'userTheme',
+      'form',
+      'user'
+    ]),
     validation: function () {
       return validateform(this.form)
     },
@@ -57,8 +61,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions('application', ['setForm']),
-    ...mapActions('business', ['updateMembers']),
+    ...mapActions('application', [
+      'setForm'
+    ]),
+    ...mapActions('business', [
+      'updateMembers'
+    ]),
     validate () {
       if (this.validation.isValidate) {
         this.isLoading = true
@@ -68,14 +76,18 @@ export default {
       }
     },
     pushMember () {
-      db.functions.pushMember(this.formatedForm)
+      const request = {
+        form: this.formatedForm,
+        userId: this.user.id
+      }
+      db.functions.pushMember(request)
         .then(response => {
           this.processResponse(response)
         })
     },
     processResponse (response) {
       if (response.status) {
-        this.updateMembers()
+        this.updateMembers(this.user.id)
         this.clearForm()
         notify(response.message, 'positive')
         this.$router.push('gerenciarequipe')

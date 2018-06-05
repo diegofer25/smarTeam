@@ -4,6 +4,7 @@ export default {
 
   updateMembers: (state, userId) => {
     state.members = firestore.functions.getMembers(userId)
+    console.log(state.members)
     return new Promise(() => 'Done')
   }
 

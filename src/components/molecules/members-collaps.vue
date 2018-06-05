@@ -1,30 +1,60 @@
 <template>
-  <div class="col-12">
-    <q-inner-loading :visible="loading">
-      <q-spinner-facebook size="100px" :color="userTheme" />
-    </q-inner-loading>
-    <transition-group enter-active-class="animated fadeInUp">
-      <div v-if="members.length > 0" key="verify">
-        <q-collapsible
-          v-for="(member, memberKey) of members" :key="memberKey"
-          popup icon="person_outline"
-          :label="member.name"
-          :sublabel="textSublabel(member.tasks)">
-          <div>Detalhes aparecerão aqui</div>
-        </q-collapsible>
-      </div>
-    </transition-group>
-  </div>
+  <q-collapsible
+    popup icon="person_outline"
+    :label="computedMember.name"
+    sublabel="Aqui o membro informará seu status">
+    <div class="q-card-title">
+      {{ textSublabel(computedMember.tasks)}}
+    </div>
+    <div v-for="(task, index) in computedMember.tasks" :key="index">
+      <q-collapsible :label="task.status">
+        Detalhes das tarefas relacionadas a esse status
+      </q-collapsible>
+    </div>
+  </q-collapsible>
 </template>
 <script>
+import { db } from './../../services/firebase/'
+import notify from './../bosons/notify'
 import { mapGetters } from 'vuex'
 
 export default {
-  props: ['members', 'loading'],
+  props: ['member'],
   computed: {
-    ...mapGetters('application', ['userTheme'])
+    ...mapGetters('application', [
+      'userTheme',
+      'user'
+    ]),
+    computedMember: function () {
+      var member = this.member
+      member['tasks'] = this.tasks
+      return member
+    }
+  },
+  data () {
+    return {
+      tasks: {}
+    }
+  },
+  mounted () {
+    this.getTasks()
   },
   methods: {
+    getTasks (member) {
+      const request = {
+        email: this.member.email,
+        userId: this.user.id
+      }
+      db.functions.getTasks(request)
+        .then((result) => {
+          if (result.status) {
+            this.tasks = result.tasks
+          } else {
+            console.log(result.error)
+            notify('Falha na comunicação com o servidor', 'Negative')
+          }
+        })
+    },
     textSublabel (tasks) {
       var string = tasks.length > 0 ? 'Resumo: ' : 'Sem tarefas cadastradas'
       const status = []

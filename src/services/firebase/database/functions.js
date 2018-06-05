@@ -2,8 +2,8 @@ import methods from './methods/'
 import { db } from './database'
 
 export default {
-  pushMember: (member) => {
-    return methods.pushMember(db, member)
+  pushMember: (request) => {
+    return methods.pushMember(db, request)
   },
 
   getMembers: (userId) => {
