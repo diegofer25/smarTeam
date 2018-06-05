@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-12">
-      <formmember></formmember>
+      <formmember name="true" cpf="true" email="true" isAdmin="true"/>
       <div class="row justify-around">
         <div class="col-10">
           <div class="row justify-around">
@@ -29,7 +29,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import formmember from './../molecules/form'
-import validateform from './../bosons/validate-form/member-form/'
+import validateform from './../bosons/validate-form/member/'
 import notify from './../bosons/notify'
 import { db } from './../../services/firebase/'
 
@@ -50,7 +50,6 @@ export default {
         name: form.name,
         email: form.email,
         cpf: form.cpf,
-        password: form.password,
         isAdmin: form.isAdmin
       }
     }
@@ -97,14 +96,7 @@ export default {
       this.isLoading = false
     },
     clearForm () {
-      this.setForm({
-        name: '',
-        email: '',
-        cpf: '',
-        password: '',
-        confirmPassword: '',
-        isAdmin: ''
-      })
+      this.setForm({ name: '', email: '', cpf: '', password: '', confirmPassword: '', isAdmin: '' })
     }
   },
   components: {
