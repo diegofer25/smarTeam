@@ -37,7 +37,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
+    ...mapGetters('application', [
       'userTheme',
       'isMini'
     ]),

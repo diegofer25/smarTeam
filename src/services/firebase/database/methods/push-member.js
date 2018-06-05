@@ -1,16 +1,13 @@
-import { userDb } from './../getters'
-const user = JSON.parse(localStorage.getItem('user'))
-
-export default (value) => {
-  return verifyMember(value)
+export default (db, value) => {
+  return verifyMember(db, value)
 }
 
-function verifyMember (member) {
-  return userDb.collection('teams').doc(user.uid).collection('members')
+function verifyMember (db, member, userId) {
+  return db.collection('teams').doc().collection('members')
     .where('email', '==', member.email).get()
     .then(results => {
       if (results.docs.length === 0) {
-        return setMember(member)
+        return setMember(db, member)
       } else {
         return {
           status: false,
@@ -18,45 +15,44 @@ function verifyMember (member) {
         }
       }
     })
-    .catch(error => {
+    .catch(() => {
       return {
         status: false,
-        message: error
+        message: 'Falha na comunicação com o servidor'
       }
     })
 }
 
-function setMember (member) {
-  return userDb.collection('teams').doc(user.id).collection('members')
+function setMember (db, member) {
+  return db.collection('teams').doc().collection('members')
     .doc(member.email).set(member)
     .then((teste) => {
       const firstName = member.name.split(' ')[0]
-      return setEmptyTasks(member.email, firstName)
+      return setEmptyTasks(db, member.email, firstName)
     })
-    .catch(function (error) {
+    .catch(() => {
       return {
         status: false,
-        message: error
+        message: 'Falha na comunicação com o servidor'
       }
     })
 }
 
-function setEmptyTasks (email, name) {
-  return userDb.collection('teams').doc(user.id).collection('members')
+function setEmptyTasks (db, email, name, team) {
+  return db.collection('teams').doc().collection('members')
     .doc(email).collection('tasks').doc('tasks')
     .set({
       tasks: []
     })
     .then((result) => {
-      console.log(result)
       return {
         status: true,
         message: name + ' cadastrado com sucesso'
       }
-    }).catch((error) => {
+    }).catch(() => {
       return {
         status: false,
-        message: error
+        message: 'Falha na comunicação com o servidor'
       }
     })
 }

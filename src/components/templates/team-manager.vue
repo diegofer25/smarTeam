@@ -28,7 +28,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'TeamManager',
   computed: {
-    ...mapGetters(['userTheme'])
+    ...mapGetters('application', ['userTheme'])
   },
   data () {
     return {

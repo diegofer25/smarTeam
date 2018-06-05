@@ -22,7 +22,7 @@ import { mapGetters } from 'vuex'
 export default {
   props: ['members', 'loading'],
   computed: {
-    ...mapGetters(['userTheme'])
+    ...mapGetters('application', ['userTheme'])
   },
   methods: {
     textSublabel (tasks) {

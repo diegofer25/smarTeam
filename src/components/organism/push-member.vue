@@ -57,7 +57,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setForm']),
+    ...mapActions('application', ['setForm']),
+    ...mapActions('business', ['updateMembers']),
     validate () {
       if (this.validation.isValidate) {
         this.isLoading = true
@@ -74,6 +75,7 @@ export default {
     },
     processResponse (response) {
       if (response.status) {
+        this.updateMembers()
         this.clearForm()
         notify(response.message, 'positive')
         this.$router.push('gerenciarequipe')

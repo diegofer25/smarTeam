@@ -19,7 +19,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Home',
   computed: {
-    ...mapGetters(['dataChart', 'chartOptions', 'userTheme'])
+    ...mapGetters('application', ['dataChart', 'chartOptions', 'userTheme'])
   },
   methods: {
     ...mapActions(['setDataChart']),

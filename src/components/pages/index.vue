@@ -46,10 +46,15 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['hasUser', 'userTheme'])
+    ...mapGetters('application', [
+      'hasUser',
+      'userTheme'
+    ])
   },
   methods: {
-    ...mapActions(['loginUser']),
+    ...mapActions('application', [
+      'loginUser'
+    ]),
     login () {
       loading.show('Aguarde, realizando login', this.userTheme)
       firebase.app.auth().signInWithEmailAndPassword(this.form.email, this.form.password)

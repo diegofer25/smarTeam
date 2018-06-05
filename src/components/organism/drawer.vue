@@ -39,7 +39,7 @@ import { mapGetters } from 'vuex'
 export default {
   props: ['qDrawer'],
   computed: {
-    ...mapGetters(['userTheme', 'isMini'])
+    ...mapGetters('application', ['userTheme', 'isMini'])
   }
 }
 </script>

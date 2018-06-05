@@ -38,7 +38,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['tableInfo', 'userTheme'])
+    ...mapGetters('application', ['tableInfo', 'userTheme'])
   }
 }
 </script>

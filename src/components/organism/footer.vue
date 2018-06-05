@@ -48,7 +48,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
+    ...mapGetters('application', [
       'userTheme'
     ])
   },
@@ -60,7 +60,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions([
+    ...mapActions('application', [
       'setTheme'
     ]),
     themeChange (color) {

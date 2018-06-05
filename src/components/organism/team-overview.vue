@@ -15,15 +15,21 @@
 
 <script>
 import { db } from './../../services/firebase/'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import notify from './../bosons/notify'
 import membersCollaps from './../molecules/members-collaps'
 
 export default {
   computed: {
-    ...mapGetters(['userTheme', 'teamMembers']),
+    ...mapGetters('application', [
+      'userTheme',
+      'user'
+    ]),
+    ...mapGetters('business', [
+      'members'
+    ]),
     computedMembers: function () {
-      return this.members
+      return this.dataMembers
     },
     computedLoading: function () {
       return this.loading
@@ -31,17 +37,22 @@ export default {
   },
   data () {
     return {
-      members: [],
+      dataMembers: [],
       loading: false
     }
   },
   mounted () {
-    this.getMembers()
+    this.updateMembers(this.user.id).then(() => {
+      this.getMembers()
+    })
   },
   methods: {
+    ...mapActions('business', [
+      'updateMembers'
+    ]),
     getMembers () {
       this.loading = true
-      this.teamMembers.then((response) => {
+      this.members.then((response) => {
         if (response.status) {
           response.members.forEach(member => {
             this.pushMember(member.data())
@@ -54,7 +65,11 @@ export default {
     },
     getTasks (member) {
       this.loading = true
-      return db.functions.getTasks(member.email)
+      const request = {
+        email: member.email,
+        userId: this.user.id
+      }
+      return db.functions.getTasks(request)
         .then((result) => {
           this.loading = false
           return result
@@ -64,7 +79,7 @@ export default {
       this.getTasks(member).then((result) => {
         if (result.status) {
           member['tasks'] = result.tasks
-          this.members.push(member)
+          this.dataMembers.push(member)
         } else {
           console.log(result.error)
           notify('Falha na comunicação com o servidor', 'Negative')

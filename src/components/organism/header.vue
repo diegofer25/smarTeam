@@ -70,10 +70,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['userTheme'])
+    ...mapGetters('application', ['userTheme'])
   },
   methods: {
-    ...mapActions(['logOff', 'setDevice']),
+    ...mapActions('application', ['logOff', 'setDevice']),
     toggleDrawer () {
       this.$emit('toggleDrawer', !this.qDrawer)
     },

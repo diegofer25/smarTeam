@@ -46,7 +46,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'FormMember',
   computed: {
-    ...mapGetters(['userTheme', 'form'])
+    ...mapGetters('application', ['userTheme', 'form'])
   }
 }
 </script>

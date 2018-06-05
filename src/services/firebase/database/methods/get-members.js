@@ -1,8 +1,5 @@
-import { userDb } from './../getters'
-const user = JSON.parse(localStorage.getItem('user'))
-
-export default () => {
-  return userDb.collection('teams').doc(user.uid).collection('members')
+export default (db, userId) => {
+  return db.collection('teams').doc(userId).collection('members')
     .get().then((response) => {
       return {
         status: true,
